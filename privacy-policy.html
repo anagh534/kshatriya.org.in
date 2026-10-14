@@ -1,130 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Kshatriya</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        .container {
-            max-width: 800px;
-        }
-        .policy-box {
-            text-align: left;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .policy-box h3 {
-            margin-top: 24px;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-        .policy-box h3:first-child {
-            margin-top: 0;
-        }
-        .policy-box p, .policy-box ul, .policy-box ol {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 12px;
-            line-height: 1.7;
-        }
-        .policy-box ul, .policy-box ol {
-            padding-left: 20px;
-        }
-        .policy-box li {
-            margin-bottom: 6px;
-        }
-        .effective-date {
-            font-size: 0.9rem;
-            color: #999;
-            text-align: left;
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Raksha App</title>
+  <meta name="description"
+    content="Privacy Policy for Raksha App - Learn how we collect, use, and protect your personal data.">
+  <style>
+    :root {
+      --primary-color: #FE6802;
+      --primary-hover: #E05B00;
+      --accent-color: #FF9E4D;
+      --bg-color: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text-primary: #212529;
+      --text-secondary: #6C757D;
+      --border-color: #E9ECEF;
+      --danger-color: #DC3545;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      line-height: 1.7;
+      color: var(--text-primary);
+      background-color: var(--bg-color);
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #FE6802 0%, #FF8533 100%);
+      color: #FFFFFF;
+      padding: 48px 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(254, 104, 2, 0.15);
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: -24px auto 60px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 40px;
+      margin-bottom: 24px;
+    }
+
+    .effective-date {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .toc {
+      background: #FFF9F5;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+    }
+
+    .toc h3 {
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .toc ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 8px 16px;
+    }
+
+    .toc a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .toc a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 36px;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 span.num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(254, 104, 2, 0.12);
+      color: var(--primary-color);
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 20px 0 10px 0;
+      color: #333333;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: #3f474e;
+    }
+
+    ul,
+    ol {
+      margin: 12px 0 20px 24px;
+      color: #3f474e;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .alert-box {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    .alert-info {
+      background-color: #EBF5FF;
+      border-left: 4px solid #0D6EFD;
+      color: #084298;
+    }
+
+    .alert-warning {
+      background-color: #FFF3CD;
+      border-left: 4px solid #FFC107;
+      color: #664D03;
+    }
+
+    .highlight-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    .highlight-table th,
+    .highlight-table td {
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .highlight-table th {
+      background-color: #F8F9FA;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .highlight-table tr:nth-child(even) {
+      background-color: #FAFAFA;
+    }
+
+    .contact-box {
+      background: #F8F9FA;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      margin-top: 16px;
+    }
+
+    .contact-box p {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      background: #FFFFFF;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 36px 16px;
+      }
+
+      header h1 {
+        font-size: 1.85rem;
+      }
+
+      .card {
+        padding: 24px 18px;
+        border-radius: 12px;
+      }
+
+      .toc ul {
+        grid-template-columns: 1fr;
+      }
+
+      .highlight-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>kshatriya.org.in</h1>
-        </header>
 
-        <main>
-            <h2>Privacy Policy</h2>
-            <p>Your privacy matters to us. This policy explains how Kshatriya collects, uses, and protects your information.</p>
-            <p class="effective-date">Effective Date: October 5, 2026</p>
-
-            <div class="policy-box">
-                <h3>1. Information We Collect</h3>
-                <p>We may collect the following types of information when you use the Kshatriya app:</p>
-                <ul>
-                    <li><strong>Account Information:</strong> Name, email address, and phone number provided during registration.</li>
-                    <li><strong>Profile Information:</strong> Any additional details you choose to add to your profile.</li>
-                    <li><strong>Usage Data:</strong> Information about how you interact with the app, such as features used and actions taken.</li>
-                    <li><strong>Device Information:</strong> Device type, operating system version, and unique device identifiers.</li>
-                </ul>
-
-                <h3>2. How We Use Your Information</h3>
-                <p>We use the information we collect to:</p>
-                <ul>
-                    <li>Provide, maintain, and improve the Kshatriya app and its features.</li>
-                    <li>Create and manage your account.</li>
-                    <li>Send important service-related notifications and updates.</li>
-                    <li>Respond to your support requests and inquiries.</li>
-                    <li>Detect, investigate, and prevent fraudulent or unauthorized activity.</li>
-                    <li>Comply with applicable legal obligations.</li>
-                </ul>
-
-                <h3>3. Sharing of Information</h3>
-                <p>We do not sell or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
-                <ul>
-                    <li><strong>Service Providers:</strong> With trusted third-party vendors who help us operate the app (e.g., hosting, analytics), bound by confidentiality agreements.</li>
-                    <li><strong>Legal Requirements:</strong> When required by law or to protect the rights, property, or safety of Kshatriya, our users, or the public.</li>
-                    <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets, where user data may be transferred as part of the transaction.</li>
-                </ul>
-
-                <h3>4. Data Retention</h3>
-                <p>We retain your personal data for as long as your account is active or as needed to provide you with our services. If you request account deletion, we will delete or anonymize your data within <strong>14 days</strong>, except where retention is required by law.</p>
-
-                <h3>5. Security</h3>
-                <p>We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
-
-                <h3>6. Children's Privacy</h3>
-                <p>The Kshatriya app is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will take steps to delete it.</p>
-
-                <h3>7. Your Rights</h3>
-                <p>Depending on your location, you may have the following rights regarding your personal data:</p>
-                <ul>
-                    <li>Access and receive a copy of the data we hold about you.</li>
-                    <li>Correct inaccurate or incomplete data.</li>
-                    <li>Request deletion of your personal data.</li>
-                    <li>Object to or restrict the processing of your data.</li>
-                </ul>
-                <p>To exercise any of these rights, please contact us at <strong>support@kshatriya.org.in</strong>.</p>
-
-                <h3>8. Changes to This Policy</h3>
-                <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by posting the new policy on this page and updating the effective date. Your continued use of the app after any changes constitutes your acceptance of the revised policy.</p>
-
-                <h3>9. Contact Us</h3>
-                <p>If you have any questions or concerns about this Privacy Policy, please reach out to us:</p>
-                <ul>
-                    <li><strong>Email:</strong> support@kshatriya.org.in</li>
-                    <li><strong>Website:</strong> https://kshatriya.org.in</li>
-                </ul>
-            </div>
-
-            <div style="margin-top: 30px;">
-                <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">&larr; Back to Home</a>
-            </div>
-        </main>
-
-        <footer>
-            <p>&copy; 2026 kshatriya.org.in. All rights reserved.</p>
-        </footer>
+  <header>
+    <div class="header-content">
+      <div class="brand-badge">Raksha App</div>
+      <h1>Privacy Policy</h1>
+      <p>Your privacy and trust are our top priorities. Here is how we safeguard your data.</p>
     </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="effective-date">
+        <span><strong>Effective Date:</strong> October 14, 2026</span>
+        <span><strong>Version:</strong> 1.0.0</span>
+      </div>
+
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#introduction">1. Introduction</a></li>
+          <li><a href="#information-we-collect">2. Information We Collect</a></li>
+          <li><a href="#device-permissions">3. Device Permissions</a></li>
+          <li><a href="#how-we-use-information">4. How We Use Information</a></li>
+          <li><a href="#sharing-and-disclosure">5. Sharing and Disclosure</a></li>
+          <li><a href="#data-storage-and-security">6. Data Storage & Security</a></li>
+          <li><a href="#user-rights-deletion">7. User Rights & Account Deletion</a></li>
+          <li><a href="#children-privacy">8. Children's Privacy</a></li>
+          <li><a href="#changes">9. Policy Changes</a></li>
+          <li><a href="#contact-us">10. Contact Information</a></li>
+        </ul>
+      </div>
+
+      <section id="introduction">
+        <h2><span class="num">1</span> Introduction</h2>
+        <p>
+          Welcome to <strong>Raksha App</strong> ("we", "our", or "us"). Raksha App is a community engagement and
+          networking platform designed to help members stay connected, share updates, engage in group discussions,
+          access community services, and stay informed.
+        </p>
+        <p>
+          This Privacy Policy describes our practices regarding the collection, use, disclosure, and protection of
+          information when you access or use our mobile application and related web services. By registering for or
+          using Raksha App, you consent to the collection and handling of your data as outlined in this policy.
+        </p>
+      </section>
+
+      <section id="information-we-collect">
+        <h2><span class="num">2</span> Information We Collect</h2>
+        <p>We collect information to provide, maintain, and improve our services to you:</p>
+
+        <h3>A. Information You Provide to Us</h3>
+        <ul>
+          <li><strong>Account Registration & Profile:</strong> When creating an account, you provide personal details
+            such as your full name, phone number, email address, password, community/member details, and profile photo.
+          </li>
+          <li><strong>User-Generated Content:</strong> Any content you share voluntarily on the platform, including
+            posts, stories, text updates, uploaded images, videos, comments, and reactions.</li>
+          <li><strong>Communications & Chat:</strong> Messages, media, and attachments sent through our direct chat and
+            group messaging features.</li>
+          <li><strong>Feedback & Support:</strong> Information you submit when contacting support, filing reports, or
+            sending feedback through the app.</li>
+        </ul>
+
+        <h3>B. Information Collected Automatically</h3>
+        <ul>
+          <li><strong>Device Information:</strong> We may collect non-sensitive device data including device model,
+            operating system version, unique device identifiers, and network connection type to ensure app compatibility
+            and troubleshoot crashes.</li>
+          <li><strong>App Usage & Analytics:</strong> Aggregate statistics on feature interactions, screen views, and
+            app performance to help us improve user experience.</li>
+          <li><strong>Log & Session Data:</strong> Authentication tokens and session logs used for keeping you signed in
+            securely.</li>
+        </ul>
+      </section>
+
+      <section id="device-permissions">
+        <h2><span class="num">3</span> Device Permissions</h2>
+        <p>To deliver key features, Raksha App may request access to certain device hardware and software capabilities:
+        </p>
+
+        <table class="highlight-table">
+          <thead>
+            <tr>
+              <th>Permission</th>
+              <th>Purpose</th>
+              <th>Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Camera</strong></td>
+              <td>Allows you to take profile pictures, create posts, capture stories, and share photos directly in
+                chats.</td>
+              <td>Optional (Only when you take photos/videos)</td>
+            </tr>
+            <tr>
+              <td><strong>Photo Library / Storage</strong></td>
+              <td>Allows you to select and upload photos or media from your device gallery for posts, stories, profile
+                photos, and chat attachments.</td>
+              <td>Optional (Only when you upload media)</td>
+            </tr>
+            <tr>
+              <td><strong>Notifications</strong></td>
+              <td>Used to alert you about new chat messages, group notices, likes, comments, and vital community
+                announcements.</td>
+              <td>Optional (Can be configured in system settings)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>You can manage or revoke these permissions at any time through your device's operating system settings.</p>
+      </section>
+
+      <section id="how-we-use-information">
+        <h2><span class="num">4</span> How We Use Your Information</h2>
+        <p>We utilize the collected information for the following legitimate purposes:</p>
+        <ul>
+          <li>To create and manage your user account and verify community membership.</li>
+          <li>To facilitate real-time chat, messaging, and content sharing between users.</li>
+          <li>To provide personalized community updates, events, business listings, and blood donation/help services.
+          </li>
+          <li>To ensure platform security, prevent spam, fraud, abuse, and enforce our Community Guidelines.</li>
+          <li>To process user feedback and deliver customer support.</li>
+          <li>To maintain, analyze, and enhance app functionality and performance.</li>
+        </ul>
+      </section>
+
+      <section id="sharing-and-disclosure">
+        <h2><span class="num">5</span> Sharing and Disclosure of Information</h2>
+        <p>We respect your privacy and do not sell your personal data. We disclose your information only under the
+          following circumstances:</p>
+        <ul>
+          <li><strong>With Other Members:</strong> Content you post publicly or set to "Everyone" is visible to other
+            community members. Posts marked with restricted privacy or direct chat messages are only visible to the
+            designated recipients.</li>
+          <li><strong>Service Providers:</strong> We may engage trusted third-party service providers (such as cloud
+            hosting, push notification infrastructure, and database hosting) strictly for infrastructure support. These
+            providers are bound by confidentiality obligations.</li>
+          <li><strong>Legal Obligations:</strong> We may disclose information if required to do so by applicable law,
+            regulation, legal process, or lawful governmental request.</li>
+          <li><strong>Safety and Protection:</strong> To protect the rights, property, or safety of Raksha App, our
+            users, or the general public in emergency situations.</li>
+        </ul>
+      </section>
+
+      <section id="data-storage-and-security">
+        <h2><span class="num">6</span> Data Storage and Security</h2>
+        <p>
+          We employ industry-standard administrative, technical, and physical security safeguards to protect your
+          personal information:
+        </p>
+        <ul>
+          <li><strong>Encryption in Transit:</strong> All data transmitted between the app and our servers is encrypted
+            using Secure Sockets Layer / Transport Layer Security (SSL/TLS).</li>
+          <li><strong>Secure Storage:</strong> Authentication credentials and tokens are stored securely on the device
+            using protected storage primitives (e.g., Keychain on iOS and EncryptedSharedPreferences on Android).</li>
+          <li><strong>Access Controls:</strong> Server access is restricted to authorized personnel with strict
+            authentication protocols.</li>
+        </ul>
+        <p>
+          While we strive to use commercially acceptable means to safeguard your personal data, no electronic
+          transmission or digital storage method is 100% secure.
+        </p>
+      </section>
+
+      <section id="user-rights-deletion">
+        <h2><span class="num">7</span> User Rights and Account Deletion</h2>
+        <p>We believe in giving you full ownership and control over your personal data:</p>
+        <ul>
+          <li><strong>Access & Update:</strong> You can review and edit your profile details directly from the Profile
+            section of the app at any time.</li>
+          <li><strong>Privacy Controls:</strong> When creating posts or sharing media, you have control over privacy
+            audiences (e.g., Everyone vs. Connections).</li>
+          <li><strong>Account Deletion:</strong> You have the permanent right to delete your account and associated
+            personal data.</li>
+        </ul>
+
+        <div class="alert-box alert-warning">
+          <strong>How to Delete Your Account:</strong>
+          <p style="margin-top: 8px; margin-bottom: 0;">
+            Open Raksha App &rarr; Navigate to <strong>Menu</strong> &rarr; Scroll to <strong>Account Settings</strong>
+            &rarr; Tap <strong>Delete Account</strong> and confirm your choice. Once confirmed, your account, personal
+            details, profile media, and authentication credentials will be permanently erased from our active databases.
+          </p>
+        </div>
+      </section>
+
+      <section id="children-privacy">
+        <h2><span class="num">8</span> Children's Privacy</h2>
+        <p>
+          Raksha App is not directed toward children under the age of 13 (or under 16 in certain jurisdictions). We do
+          not knowingly collect or solicit personal information from children. If we discover that a child has provided
+          us with personal information, we will immediately take steps to remove such information and terminate the
+          account.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2><span class="num">9</span> Changes to This Privacy Policy</h2>
+        <p>
+          We may update our Privacy Policy periodically to reflect changes in our services or applicable legal
+          requirements. When we make modifications, we will update the "Effective Date" at the top of this page. We
+          encourage you to review this policy periodically. Continued use of Raksha App after any changes constitutes
+          acceptance of the revised policy.
+        </p>
+      </section>
+
+      <section id="contact-us">
+        <h2><span class="num">10</span> Contact Information</h2>
+        <p>
+          If you have questions, feedback, or concerns regarding this Privacy Policy or your personal data, please
+          contact our team:
+        </p>
+        <div class="contact-box">
+          <p><strong>App:</strong> Raksha App</p>
+          <p><strong>Team / Organization:</strong> Kshatriya Community</p>
+          <p><strong>Email:</strong> <a href="mailto:support@ameyasmarttechnologies.com"
+              style="color: var(--primary-color);">support@ameyasmarttechnologies.com</a></p>
+          <p><strong>Website:</strong> <a href="https://kshatriya.me" target="_blank" rel="noopener noreferrer"
+              style="color: var(--primary-color);">https://kshatriya.me</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Raksha App. All rights reserved.</p>
+  </footer>
+
 </body>
+
 </html>
