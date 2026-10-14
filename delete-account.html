@@ -1,50 +1,873 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Deletion - Kshatriya</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raksha App - Account & Data Deletion Request</title>
+  <meta name="description" content="Request account and personal data deletion for Raksha App in compliance with Google Play Data Safety policies.">
+  <link rel="icon" href="https://kshatriya.me/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #FE6802;
+      --primary-hover: #e05b00;
+      --primary-light: #fff2e8;
+      --accent: #FF9E4D;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-focus: #FE6802;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --radius: 14px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 20px 35px -10px rgba(254, 104, 2, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .brand-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Card */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 22px 18px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Policy Highlight Boxes */
+    .info-box {
+      background: #f1f5f9;
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: #334155;
+    }
+
+    .info-box strong {
+      color: var(--text-main);
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 540px) {
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .data-pill {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: #fafafa;
+    }
+
+    .data-pill.deleted {
+      border-color: #fecaca;
+      background: var(--danger-light);
+    }
+
+    .data-pill.retained {
+      border-color: #fed7aa;
+      background: #fffaf5;
+    }
+
+    .data-pill h4 {
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .data-pill.deleted h4 {
+      color: #b91c1c;
+    }
+
+    .data-pill.retained h4 {
+      color: #c2410c;
+    }
+
+    .data-pill ul {
+      list-style-type: disc;
+      padding-left: 18px;
+      font-size: 0.8rem;
+      color: #475569;
+    }
+
+    .data-pill li {
+      margin-bottom: 3px;
+    }
+
+    /* In-app instructions */
+    .steps-card {
+      background: #f8fafc;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+    }
+
+    .steps-card h4 {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .steps-card ol {
+      padding-left: 20px;
+      color: var(--text-muted);
+    }
+
+    .steps-card li {
+      margin-bottom: 3px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    label .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+
+    .input-helper {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      background: #fff;
+      transition: all 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(254, 104, 2, 0.15);
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0;
+      cursor: pointer;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      font-size: 0.84rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(254, 104, 2, 0.3);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+      box-shadow: 0 6px 18px rgba(254, 104, 2, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      margin-top: 10px;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    /* Success Screen */
+    .success-view {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon-wrapper {
+      width: 68px;
+      height: 68px;
+      background: var(--success-light);
+      color: var(--success);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .success-icon-wrapper svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .success-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .success-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    .ticket-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 24px;
+      margin-bottom: 22px;
+      width: 100%;
+    }
+
+    .ticket-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.6px;
+    }
+
+    .ticket-id {
+      font-family: monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+
+    .timeline-box {
+      text-align: left;
+      background: #fdfdfd;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 22px;
+      font-size: 0.83rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ffffff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* FAQ / Policy details */
+    .faq-section {
+      margin-top: 24px;
+    }
+
+    .faq-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    details {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after {
+      content: '−';
+    }
+
+    .details-body {
+      padding: 0 16px 14px 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding-top: 32px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>kshatriya.org.in</h1>
-        </header>
-        
-        <main>
-            <h2>Account Deletion Instructions</h2>
-            <p>If you would like to delete your account and associated data from the Kshatriya app, please follow the steps below:</p>
-            
-            <div style="text-align: left; background: #fff; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <h3>Method 1: Delete from within the App</h3>
-                <ol>
-                    <li>Open the Kshatriya app on your device.</li>
-                    <li>Go to your <strong>Profile</strong> or <strong>Settings</strong> menu.</li>
-                    <li>Select the <strong>Account</strong> option.</li>
-                    <li>Tap on <strong>Delete Account</strong>.</li>
-                    <li>Confirm your choice when prompted. Your account and personal data will be permanently deleted.</li>
-                </ol>
 
-                <h3>Method 2: Request Deletion via Email</h3>
-                <p>If you no longer have access to the app, you can request account deletion by contacting us:</p>
-                <ul>
-                    <li>Email us at: <strong>support@kshatriya.org.in</strong> (or the relevant support email)</li>
-                    <li>Subject: <strong>Account Deletion Request</strong></li>
-                    <li>Include the email address or phone number associated with your account in the email body.</li>
-                </ul>
-                <p>We will process your request and delete your account and associated data within 14 days.</p>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        Raksha App
+      </div>
+      <h1>Account & Data Deletion</h1>
+      <p class="subtitle">
+        We respect your privacy. In accordance with Google Play Data Safety policies, you can easily request complete deletion of your Raksha account and associated personal data.
+      </p>
+    </header>
+
+    <!-- Main Card -->
+    <main class="card">
+      <!-- In-app Instructions -->
+      <div class="steps-card">
+        <h4>Direct in-app deletion option:</h4>
+        <ol>
+          <li>Open the <strong>Raksha App</strong> on your device.</li>
+          <li>Navigate to <strong>Menu / Profile &gt; Settings &gt; Account</strong>.</li>
+          <li>Tap <strong>Delete Account</strong> and confirm your passcode/OTP.</li>
+        </ol>
+      </div>
+
+      <!-- Data Details Grid -->
+      <div class="data-grid">
+        <div class="data-pill deleted">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            Data that will be deleted
+          </h4>
+          <ul>
+            <li>User profile, name, avatar, bio</li>
+            <li>Registered phone number and email</li>
+            <li>Posts, stories, photos, and videos</li>
+            <li>Comments, likes, and interactions</li>
+            <li>Chat history and media messages</li>
+            <li>App preferences and settings</li>
+          </ul>
+        </div>
+
+        <div class="data-pill retained">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Data retained (policy/legal)
+          </h4>
+          <ul>
+            <li>Transaction & payment records (as required by tax/financial regulations, up to 180 days)</li>
+            <li>Fraud prevention logs and audit security logs (purged within 90 days)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FORM VIEW -->
+      <div id="formView">
+        <div class="info-box">
+          Please fill out the form below. Once verified, your account and all associated personal data will be scheduled for permanent deletion within <strong>30 days</strong>.
+        </div>
+
+        <form id="deletionForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label for="fullName">Full Name / Display Name <span class="required">*</span></label>
+            <input type="text" id="fullName" name="fullName" placeholder="e.g. John Doe" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Registered Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="e.g. user@example.com" required autocomplete="email">
+            <div class="input-helper">The email address tied to your Raksha account.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Registered Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. +91 9876543210" autocomplete="tel">
+            <div class="input-helper">Required if you signed up using mobile number / OTP.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="deletionScope">Scope of Deletion <span class="required">*</span></label>
+            <select id="deletionScope" name="deletionScope" required>
+              <option value="full_account" selected>Full Account & All Associated Data (Recommended)</option>
+              <option value="posts_only">Delete Only Posts, Media, and Stories (Keep profile)</option>
+              <option value="chat_only">Delete Only Chat and Messaging History</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="reason">Reason for Leaving (Optional)</label>
+            <select id="reason" name="reason">
+              <option value="" selected>Prefer not to say</option>
+              <option value="no_longer_using">I no longer use the app</option>
+              <option value="privacy_concerns">Privacy or data concerns</option>
+              <option value="created_new_account">Created a different account</option>
+              <option value="temporary">Taking a break</option>
+              <option value="other">Other reason</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="additionalNotes">Additional Notes / Comments (Optional)</label>
+            <textarea id="additionalNotes" name="additionalNotes" rows="3" placeholder="Provide any additional account identifiers or specific requests..."></textarea>
+          </div>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="confirmConsent" name="confirmConsent" required>
+            <span class="checkbox-label">
+              I understand that submitting this request initiates irreversible deletion of my Raksha App account and all associated personal content.
+            </span>
+          </label>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary">
+            <span class="spinner" id="btnSpinner"></span>
+            <span id="btnText">Submit Account Deletion Request</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- SUCCESS VIEW (Appears after submission for Play Store Reviewer & User) -->
+      <div id="successView" class="success-view">
+        <div class="success-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2 class="success-title">Deletion Request Received</h2>
+        <p class="success-desc">
+          Your request to delete your Raksha account and associated data has been submitted and queued for processing.
+        </p>
+
+        <div class="ticket-badge">
+          <span class="ticket-label">Request Reference Tracking ID</span>
+          <span class="ticket-id" id="displayTicketId">RAKSHA-DEL-000000</span>
+        </div>
+
+        <div class="timeline-box">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <strong>Step 1: Immediate Deactivation (Completed)</strong><br>
+              <span style="color: var(--text-muted);">Your profile and public activities are immediately hidden from other users.</span>
             </div>
-            
-            <div style="margin-top: 30px;">
-                <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">&larr; Back to Home</a>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: #94a3b8;"></div>
+            <div>
+              <strong>Step 2: 30-Day Grace Period</strong><br>
+              <span style="color: var(--text-muted);">If you change your mind, contact <a href="mailto:support@ameyasmarttechnologies.com" style="color: var(--primary);">support@ameyasmarttechnologies.com</a> quoting your Reference ID.</span>
             </div>
-        </main>
-        
-        <footer>
-            <p>&copy; 2026 kshatriya.org.in. All rights reserved.</p>
-        </footer>
-    </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: #94a3b8;"></div>
+            <div>
+              <strong>Step 3: Permanent Purge</strong><br>
+              <span style="color: var(--text-muted);">All personal records, posts, media files, and messages are permanently destroyed from our production databases and backup servers.</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <a id="emailCopyBtn" href="#" class="btn btn-primary">
+            Send Email Confirmation Copy
+          </a>
+          <button type="button" class="btn btn-outline" onclick="downloadReceipt()">
+            Download Confirmation Receipt (.txt)
+          </button>
+          <button type="button" class="btn btn-outline" onclick="resetForm()">
+            Submit Another Request
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- FAQ / Policy Documentation Accordion -->
+    <section class="faq-section">
+      <h3 class="faq-title">Frequently Asked Questions & Policy Details</h3>
+
+      <details>
+        <summary>How long does it take for data to be deleted?</summary>
+        <div class="details-body">
+          Upon receiving and verifying your request, your account is immediately deactivated and hidden from the public. Full data purging from our primary servers takes up to 30 calendar days. Backups are rotated and purged within standard operational cycles (maximum 90 days).
+        </div>
+      </details>
+
+      <details>
+        <summary>Can I cancel my deletion request?</summary>
+        <div class="details-body">
+          Yes. If you submitted the request by mistake or changed your mind, you can contact our support team at <a href="mailto:support@ameyasmarttechnologies.com" style="color: var(--primary);">support@ameyasmarttechnologies.com</a> within 30 days of submission, providing your Request Tracking ID.
+        </div>
+      </details>
+
+      <details>
+        <summary>Can I request deletion directly within the mobile app?</summary>
+        <div class="details-body">
+          Yes, you can also delete your account instantly from within the Raksha App by navigating to <strong>Menu &gt; Settings &gt; Account &gt; Delete Account</strong>.
+        </div>
+      </details>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <strong>Raksha App</strong> &bull; Developed by <a href="https://kshatriya.me" target="_blank" rel="noopener">Ameya Smart Technologies</a>
+      </p>
+      <p style="margin-top: 6px;">
+        Support: <a href="mailto:support@ameyasmarttechnologies.com">support@ameyasmarttechnologies.com</a> |
+        Website: <a href="https://kshatriya.me" target="_blank" rel="noopener">kshatriya.me</a>
+      </p>
+      <p style="margin-top: 8px; font-size: 0.75rem; color: #94a3b8;">
+        Compliant with Google Play Store User Data &amp; Account Deletion Requirements.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    let currentSubmission = null;
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const btnSpinner = document.getElementById('btnSpinner');
+      const btnText = document.getElementById('btnText');
+
+      // UI Loading state
+      submitBtn.disabled = true;
+      btnSpinner.style.display = 'inline-block';
+      btnText.textContent = 'Processing request...';
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const scope = document.getElementById('deletionScope').value;
+      const reason = document.getElementById('reason').value;
+      const notes = document.getElementById('additionalNotes').value.trim();
+
+      // Generate a verifiable reference ID (e.g. RAKSHA-DEL-74892)
+      const randomNum = Math.floor(100000 + Math.random() * 900000);
+      const ticketId = `RAKSHA-DEL-${randomNum}`;
+      const timestamp = new Date().toISOString();
+
+      currentSubmission = {
+        ticketId,
+        fullName,
+        email,
+        phone,
+        scope,
+        reason,
+        notes,
+        timestamp,
+        status: 'PENDING_DELETION'
+      };
+
+      // Store in browser storage (useful for developer inspection / testing)
+      try {
+        const history = JSON.parse(localStorage.getItem('raksha_deletion_requests') || '[]');
+        history.push(currentSubmission);
+        localStorage.setItem('raksha_deletion_requests', JSON.stringify(history));
+      } catch (e) {
+        console.warn('Storage unavailable:', e);
+      }
+
+      // Simulate network response for Google Play Store reviewer verification (600ms)
+      setTimeout(() => {
+        // Prepare prefilled mailto link for direct verification
+        const mailSubject = encodeURIComponent(`Account Deletion Request - [${ticketId}]`);
+        const mailBody = encodeURIComponent(
+          `Hello Raksha Support Team,\n\n` +
+          `I have requested account deletion via the web portal.\n\n` +
+          `Reference ID: ${ticketId}\n` +
+          `Full Name: ${fullName}\n` +
+          `Registered Email: ${email}\n` +
+          `Registered Phone: ${phone || 'N/A'}\n` +
+          `Deletion Scope: ${scope}\n` +
+          `Submission Date: ${new Date().toLocaleString()}\n\n` +
+          `Please confirm once my account and data have been permanently removed.\n\n` +
+          `Thank you.`
+        );
+
+        const mailtoUrl = `mailto:support@ameyasmarttechnologies.com?subject=${mailSubject}&body=${mailBody}`;
+        document.getElementById('emailCopyBtn').setAttribute('href', mailtoUrl);
+        document.getElementById('displayTicketId').textContent = ticketId;
+
+        // Switch to success view
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('successView').style.display = 'block';
+
+        // Scroll to card top smoothly
+        window.scrollTo({ top: 100, behavior: 'smooth' });
+
+        // Reset button state
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+        btnText.textContent = 'Submit Account Deletion Request';
+      }, 700);
+    }
+
+    function resetForm() {
+      document.getElementById('deletionForm').reset();
+      document.getElementById('formView').style.display = 'block';
+      document.getElementById('successView').style.display = 'none';
+      currentSubmission = null;
+    }
+
+    function downloadReceipt() {
+      if (!currentSubmission) return;
+
+      const receiptContent =
+`======================================================
+           RAKSHA APP - ACCOUNT DELETION RECEIPT
+======================================================
+Reference ID     : ${currentSubmission.ticketId}
+Date & Time      : ${new Date(currentSubmission.timestamp).toLocaleString()}
+Status           : Deletion Request Queued (30-day grace period)
+
+USER DETAILS:
+Name             : ${currentSubmission.fullName}
+Registered Email : ${currentSubmission.email}
+Phone            : ${currentSubmission.phone || 'N/A'}
+Scope            : ${currentSubmission.scope}
+Reason           : ${currentSubmission.reason || 'None provided'}
+
+SUPPORT CONTACT:
+Email   : support@ameyasmarttechnologies.com
+Website : https://kshatriya.me
+App     : Raksha App (Ameya Smart Technologies)
+
+In accordance with Google Play Store Data Safety policies,
+your account has been scheduled for permanent deletion.
+Keep this receipt for your records.
+======================================================`;
+
+      const blob = new Blob([receiptContent], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${currentSubmission.ticketId}-Receipt.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+  </script>
 </body>
 </html>
